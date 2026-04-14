@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+  Публикации в категории «{{ category.title }}»
+{% endblock %}
+{% block content %}
+<h1>Публикации в категории «{{ category.title }}»</h1>
+<p class="mb-5">{{ category.description }}</p>
+{% for post in page %}
+  <article class="mb-5">  
+    {% include "includes/post_card.html" %}
+  </article>   
+{% endfor %}
+{% if page.has_other_pages %}
+  <nav>
+    {% if page.has_previous %}
+      <a href="?page={{ page.previous_page_number }}">Предыдущая</a>
+    {% endif %}
+    {% if page.has_next %}
+      <a href="?page={{ page.next_page_number }}">Следующая</a>
+    {% endif %}
+  </nav>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Профиль {{ user.username }}{% endblock %}
+{% block content %}
+  <h1>Профиль пользователя {{ user.username }}</h1>
+  <p>Имя: {{ user.first_name }} {{ user.last_name }}</p>
+  <p>Email: {{ user.email }}</p>
+  {% if user == request.user %}
+    <a href="{% url 'pages:edit_profile' %}">Редактировать профиль</a>
+    <a href="{% url 'auth:password_change' %}">Изменить пароль</a>
+  {% endif %}
+  <h2>Публикации пользователя</h2>
+  {% for post in page %}
+    <article>
+      <h3><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a></h3>
+      <p>{{ post.pub_date|date:"d E Y" }}</p>
+      <p>{{ post.text|truncatewords:20 }}</p>
+    </article>
+  {% empty %}
+    <p>Публикаций пока нет.</p>
+  {% endfor %}
+  {% if page.has_other_pages %}
+    <nav>
+      {% if page.has_previous %}
+        <a href="?page={{ page.previous_page_number }}">Предыдущая</a>
+      {% endif %}
+      {% if page.has_next %}
+        <a href="?page={{ page.next_page_number }}">Следующая</a>
+      {% endif %}
+    </nav>
+  {% endif %}
+{% endblock %}
