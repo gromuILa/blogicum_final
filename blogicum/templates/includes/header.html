@@ -29,7 +29,22 @@
                 Новая публикация
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'blog:profile' user.username %}">
+                Профиль
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'auth:logout' %}">
+                Выйти
+              </a>
+            </li>
           {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'auth:login' %}">
+                Войти
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'auth:registration' %}">
                 Регистрация
