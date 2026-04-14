@@ -22,3 +22,4 @@ ENV/
 sent_emails/
 media/
 db.sqlite3
+*.db

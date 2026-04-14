@@ -54,9 +54,19 @@ python manage.py runserver
 
 ## Учётные данные для тестирования
 
+После применения миграций создайте суперпользователя:
+```bash
+python manage.py createsuperuser
+```
+
+Затем создайте тестового пользователя:
+```bash
+python manage.py shell -c "from django.contrib.auth.models import User; u, _ = User.objects.get_or_create(username='testuser'); u.set_password('Test@123'); u.save()"
+```
+
 ### Администратор
-- Логин: `admin`
-- Пароль: `Admin@123`
+- Логин: `admin` (создаётся через createsuperuser)
+- Пароль: задаётся при создании
 - Доступ: панель администратора, создание категорий и местоположений
 
 ### Обычный пользователь
